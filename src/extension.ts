@@ -1,4 +1,3 @@
-//const App = imports.gi.Gio.DesktopAppInfo.new('DuckDuckGo')
 const { Gio, Soup } = imports.gi;
 const { main } = imports.ui;
 const Me = imports.misc.extensionUtils.getCurrentExtension();
@@ -77,7 +76,7 @@ function getResultMeta(id: string): SearchResultMeta {
   return {
     id,
     name: answer,
-    description: `Search DuckDuckGo`,
+    description: `Search Google`,
     clipboardText: answer,
     createIcon() { return null },
   };
@@ -92,9 +91,9 @@ function makeLaunchContext() {
 
 const ddgProvider: SearchProvider = {
   appInfo: {
-    get_name: () => `DuckDuckGo`,
+    get_name: () => `Google`,
     get_icon: () => gicon,
-    get_id: () => `duckduckgo-provider`,
+    get_id: () => `google-provider`,
     should_show: () => true,
   },
 
@@ -106,7 +105,7 @@ const ddgProvider: SearchProvider = {
     const { type, answer } = JSON.parse(result) as unknown as SearchAnswer;
     let url = "";
     if (type === "suggestion" || type === "query") {
-      url = `https://duckduckgo.com/?q=${answer}`;
+      url = `https://google.com/search?q=${answer}`;
     } else if (type === "bang") {
       url = answer;
     }
@@ -158,12 +157,12 @@ export function init() {}
 
 let instance: SearchProvider;
 export function enable() {
-  global.log(`Enabling DuckDuckGo IA Search Provider`);
+  global.log(`Enabling Google IA Search Provider`);
   instance = Object.create(ddgProvider);
   main.overview.viewSelector._searchResults._registerProvider(instance);
 }
 
 export function disable() {
-  global.log(`Disabling DuckDuckGo IA Search Provider`);
+  global.log(`Disabling Google IA Search Provider`);
   main.overview.viewSelector._searchResults._unregisterProvider(instance);
 }
