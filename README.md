@@ -1,4 +1,4 @@
-### gnome-shell-duckduckgo-search-provider
+### gnome-shell-google-search-provider
 
 This is a Search Provider for [Gnome Shell](https://wiki.gnome.org/Projects/GnomeShell), and it provides [Google Search](https://google.com/) functionality.
 
