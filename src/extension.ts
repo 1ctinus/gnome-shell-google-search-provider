@@ -153,16 +153,24 @@ const ddgProvider: SearchProvider = {
   }
 };
 
+function getOverviewSearchResult() {
+  if (main.overview.viewSelector !== undefined) {
+    return main.overview.viewSelector._searchResults;
+  } else {
+    return main.overview._overview.controls._searchController._searchResults;
+  }
+}
+
 export function init() {}
 
 let instance: SearchProvider;
 export function enable() {
   global.log(`Enabling Google IA Search Provider`);
   instance = Object.create(ddgProvider);
-  main.overview.viewSelector._searchResults._registerProvider(instance);
+  getOverviewSearchResult()._registerProvider(instance);
 }
 
 export function disable() {
   global.log(`Disabling Google IA Search Provider`);
-  main.overview.viewSelector._searchResults._unregisterProvider(instance);
+  getOverviewSearchResult()._unregisterProvider(instance);
 }
