@@ -5,5 +5,5 @@
     "settings-schema": "org.gnome.shell.extensions.google-search-provider",
     "description": "Add Google search to Gnome Shell Search",
     "url": "https://github.com/MrNinso/gnome-shell-google-search-provider",
-    "version": 3
+    "version": 4
 }
