@@ -39,7 +39,7 @@ function getIA(q: string): Promise<DDGInstantAnswer> {
       format: "json",
       pretty: "0",
       no_redirect: "1",
-      t: "gnome-shell-search-extension",
+      t: "gnome-shell-google-search-extension",
     },
   ) as unknown as Promise<DDGInstantAnswer>;
 }
@@ -47,7 +47,7 @@ function getIA(q: string): Promise<DDGInstantAnswer> {
 function getSuggestions(q: string): Promise<DDGSuggestion[]> {
   return getJSON(
     `https://duckduckgo.com/ac/`,
-    { q, t: "gnome-shell-search-extension" },
+    { q, t: "gnome-shell-google-search-extension" },
   ) as unknown as Promise<
     DDGSuggestion[]
   >;
