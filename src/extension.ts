@@ -89,17 +89,17 @@ function makeLaunchContext() {
   );
 }
 
-const ddgProvider: SearchProvider = {
-  appInfo: {
-    get_name: () => `Google`,
-    get_icon: () => gicon,
-    get_id: () => `google-provider`,
-    should_show: () => true,
-  },
-
+class ddgProvider {
+  constructor {
+    this.appInfo= Gio.AppInfo.create_from_commandline('true', 'Google', null)
+       this.appInfo.get_name = () => `Google`
+       this.appInfo.get_icon= () => gicon
+       this.appInfo.get_id= () => `google-provider`
+       this.appInfo.should_show= () => true
+  }
   getResultMetas(results: string[], cb: (results: SearchResultMeta[]) => void) {
     cb(results.map(getResultMeta));
-  },
+  }
 
   activateResult(result: string) {
     const { type, answer } = JSON.parse(result) as unknown as SearchAnswer;
@@ -110,11 +110,11 @@ const ddgProvider: SearchProvider = {
       url = answer;
     }
     if (url) Gio.app_info_launch_default_for_uri(url, makeLaunchContext());
-  },
+  }
 
   filterResults(providerResults: string[], maxResults: number) {
     return providerResults.slice(0, maxResults);
-  },
+  }
 
   async getInitialResultSet(terms: string[], cb: (results: string[]) => void) {
     const query = terms.join(" ");
@@ -146,7 +146,7 @@ const ddgProvider: SearchProvider = {
     }
     global.log(`DDG Results: [${results.join(",")}]`);
     cb(results);
-  },
+  }
 
   getSubsearchResultSet(_, terms: string[], cb: (results: string[]) => void) {
     this.getInitialResultSet(terms, cb);
@@ -163,14 +163,15 @@ function getOverviewSearchResult() {
 
 export function init() {}
 
-let instance: SearchProvider;
+let instance = null;
 export function enable() {
   global.log(`Enabling Google IA Search Provider`);
-  instance = Object.create(ddgProvider);
+  instance = new ddgProvider();
   getOverviewSearchResult()._registerProvider(instance);
 }
 
 export function disable() {
   global.log(`Disabling Google IA Search Provider`);
   getOverviewSearchResult()._unregisterProvider(instance);
+  instance = null;
 }
