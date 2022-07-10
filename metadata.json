@@ -1,6 +1,6 @@
 {
     "name": "Google Search Provider",
-    "shell-version": ["3.36", "3.38", "40.0", "41.0", "42.0"],
+    "shell-version": ["3.36", "3.38", "40.0", "41", "42"],
     "uuid": "gnome-shell-Google-search-provider@MrNinso",
     "settings-schema": "org.gnome.shell.extensions.google-search-provider",
     "description": "Add Google search to Gnome Shell Search \n TODO: \n - Add google suggestions (For now using duckduckGo suggestions)",
