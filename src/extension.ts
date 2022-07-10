@@ -90,7 +90,7 @@ function makeLaunchContext() {
 }
 
 class ddgProvider {
-  constructor {
+  constructor() {
     this.appInfo= Gio.AppInfo.create_from_commandline('true', 'Google', null)
        this.appInfo.get_name = () => `Google`
        this.appInfo.get_icon= () => gicon
